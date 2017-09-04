@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="page-header">
+        <h1>Alerts<small>Existing Alerts</small></h1>
+    </div>
+    <div class="list-group">
+        {% if alerts is not None %}
+            {% for alert in alerts %}
+                <a href="{{ url_for('alerts.get_alert_page', alert_id=alert._id) }}" class="list-group-item {{ 'list-group-item-warning' if alert.active else '' }}">
+                    <h4 class="list-group-item-heading">Alert for {{ alert.item.name }}</h4>
+                    <p class="list-group-item-text">Last price found: <strong>{{ "${:,.2f}".format(alert.item.price) }}</strong><br/>
+                        Last checked on <strong>{{ alert.last_checked.strftime("%m-%d-%Y at %H:%M") }}</strong></p>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="list-group-item">No alerts found</p>
+        {% endif %}
+    </div>
+    <a class="btn btn-success" href="{{ url_for('alerts.create_alert') }}">Create Alert</a>
+{% endblock %}
