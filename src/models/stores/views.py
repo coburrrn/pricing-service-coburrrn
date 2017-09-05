@@ -1,7 +1,6 @@
 
 from flask import Blueprint, render_template, request, json, url_for
 from werkzeug.utils import redirect
-import src.models.users.decorators as decorators
 from src.models.stores.store import Store
 
 store_blueprint = Blueprint('stores', __name__)
@@ -38,7 +37,6 @@ def delete_store(store_id):
     return redirect(url_for('.index'))
 
 @store_blueprint.route('/new', methods=['GET','POST'])
-@decorators.requires_admin
 def create_store():
     if request.method == 'POST':
         name = request.form['name']
