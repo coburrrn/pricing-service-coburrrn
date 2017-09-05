@@ -4,6 +4,7 @@ from src.common.database import Database
 from src.common.utils import Utils
 import src.models.users.errors as UserErrors
 import src.models.users.constants as UserConstants
+from src.models.alerts.alert import Alert
 
 
 class User(object):
